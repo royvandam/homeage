@@ -140,9 +140,9 @@ with lib; let
       ${pkgs.gnused}/bin/sed \
         "s/\$UID/$(id -u)/g" |
       while IFS=$"\n" read -r c; do
-        path=$(echo "$c" | ${jq} --raw-output '.path')
-        symlinks=$(echo "$c" | ${jq} --raw-output '.symlinks[]')
-        copies=$(echo "$c" | ${jq} --raw-output '.copies[]')
+        path=$(echo "$c" | ${jq} --raw-output '.[0].path')
+        symlinks=$(echo "$c" | ${jq} --raw-output '.[0].symlinks[]')
+        copies=$(echo "$c" | ${jq} --raw-output '.[0].copies[]')
 
         ${cleanupSecret "[homeage] "}
       done
